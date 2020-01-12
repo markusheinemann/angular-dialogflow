@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <div class="chat chat-app">
+    <div class="chat-content">
+      <div class="conversation">
+        <div class="conversation-wrapper">
+          <div class="conversation-header justify-content-between">
+            <div class="media align-items-center">
+              <div class="p-l-15">
+                <h6 class="m-b-0">Chatbot</h6>
+                <p class="m-b-0 text-muted font-size-13">
+                  <nz-badge nzStatus="success"></nz-badge>
+                  <span>Online</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="conversation-body" #scrollBottom>
+            <div class="msg" [ngClass]="{'msg-recipient': !message.isOwner, 'msg-sent': message.isOwner}"
+              *ngFor="let message of messageList">
+              <div class="bubble" *ngIf="message.text.length > 1">
+                <div class="bubble-wrapper">
+                  <span>{{message.text}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="conversation-footer" style="display: relative!important;">
+            <input [(ngModel)]="message" class="chat-input" type="text" placeholder="Type a message..."
+              (keydown.enter)="sendMessage(message);$event.preventDefault()">
+            <ul class="list-inline d-flex align-items-center m-b-0">
+              <li class="list-inline-item">
+                <a class="text-gray font-size-20" nz-tooltip nzTitle="Spracherkennung" holdable
+                  (start)="startRecording()" (stop)="stopRecording()">
+                  <i class="fas fa-microphone"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <button class="d-none d-md-block" nz-button nzType="primary" (click)="sendMessage(message)">
+                  <span class="m-r-10">Send</span>
+                  <i class="far fa-paper-plane"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
